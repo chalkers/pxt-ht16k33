@@ -1,0 +1,17 @@
+{
+    "name": "pxt-ht16k33",
+    "version": "0.0.0",
+    "description": "",
+    "dependencies": {
+        "adafruit-metro-m0-express": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": false,
+    "additionalFilePaths": []
+}
