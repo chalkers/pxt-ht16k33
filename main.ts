@@ -82,6 +82,7 @@ namespace ht16k33 {
     }
 
     function initializeDisplay() {
+        pause(10);
         sendCommand(HT16K33_COMMANDS.TURN_OSCILLATOR_ON)
         sendCommand(HT16K33_COMMANDS.TURN_DISPLAY_ON)
         setBrightness(15);
