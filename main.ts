@@ -41,8 +41,6 @@ namespace ht16k33 {
     let matrixAddress = 0;
 
     function sendCommand(command: HT16K33_COMMANDS) {
-        let buf = pins.createBuffer(2)
-
         pins.i2cWriteNumber(
             matrixAddress,
             0,
@@ -61,7 +59,7 @@ namespace ht16k33 {
     //% blockId="HT16K33_RENDER_BITMAP" block="render bitmap %bitmap"
     export function render(bitmap: number[]) {
         const formattedBitmap = formatBimap(bitmap)
-        let buff = pins.createBufferFromArray(formattedBitmap);
+        const buff = pins.createBufferFromArray(formattedBitmap);
         pins.i2cWriteBuffer(matrixAddress, buff, false);
     }
 
@@ -82,7 +80,12 @@ namespace ht16k33 {
     }
 
     function initializeDisplay() {
-        pause(10);
+        /** 
+         * Required to initialize I2C 
+         * Issue: https://github.com/lancaster-university/codal-samd/issues/13
+         **/
+        pins.SDA.setPull(PinPullMode.PullNone)
+        pins.SCL.setPull(PinPullMode.PullNone)
         sendCommand(HT16K33_COMMANDS.TURN_OSCILLATOR_ON)
         sendCommand(HT16K33_COMMANDS.TURN_DISPLAY_ON)
         setBrightness(15);
